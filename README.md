@@ -1,6 +1,5 @@
 # TST-MicroserviceDeployment
-Nama : Aditya Inas Hamidah
-NIM : 18221172
+Aditya Inas Hamidah (18221172)
 
 ## Core Service
 Menampilkan media (foto/video) yang diupload oleh penyedia layanan performance
@@ -17,7 +16,7 @@ Menampilkan media (foto/video) yang diupload oleh penyedia layanan performance
 - Edit Caption
 
 ## How to Use
-1. Gunakan link 20.247.137.194/docs#
+1. Gunakan link performaremedia.azurewebsites.net/docs#
 2. Coba fungsi-fungsi yang tersedia dengan try it out
 3. Ikuti langkah-langkahnya sehingga dapat berhasil
 
