@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import json
 import os
 from typing import Optional  # Import Optional for the FileType field
+from auth import router as auth_router
 
 # Base model
 class Options(BaseModel):
@@ -43,7 +44,7 @@ async def get_Media(option_FileName : str):
 #------------------------------- POST ----------------------------------
 
 # Using an asynchronous POST method for communication
-@router.post("/datainput")
+@router.post("/acceptdata")
 async def get_data(request: Request, options: Options):
     # Waits for the request and converts it into JSON
     result = await request.json()
@@ -58,7 +59,7 @@ async def get_data(request: Request, options: Options):
     return result
 
 #Upload a file and return filename as response
-@router.post("/fileuploader")
+@router.post("/uploadfile")
 async def create_upload_file(data: UploadFile = File(...)):
 #Prints result in cmd – verification purpose
     global image_id_counter
@@ -94,7 +95,7 @@ async def upload_accept_file(options: Options = Depends(),data: UploadFile = Fil
 
 #-------------------------- UPDATE -----------------------------
 
-@router.put('/desc_edit')
+@router.put('/updatedesc')
 async def update_Media_Desc(media: Options):
     media_dict = media.dict()
     media_found = False
@@ -136,3 +137,4 @@ async def delete_media(FileName: str):
         return {"message": "Media not found"}
 
 app.include_router(router)
+app.include_router(auth_router)
