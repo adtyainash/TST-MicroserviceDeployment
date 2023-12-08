@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById("password-login").value;
     
         try {
-        const response = await fetch("http://127.0.0.1:8000/token", {
+        const response = await fetch("https://performave.azurewebsites.net/token", {
             method: "POST",
             headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         if (response.ok) {
             showNotificationOk("Welcome to design service")
-            window.location.href = "http://127.0.0.1:8000/docs";
+            window.location.href = "https://performave.azurewebsites.net/docs";
             document.getElementById("username-login").value = "";
             document.getElementById("password-login").value = "";
             loginloading.style.backgroundColor = '';
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // formData.append("username", username);
         // formData.append("password", password);
         try {
-            const response = await fetch("http://127.0.0.1:8000/register", {
+            const response = await fetch("https://performave.azurewebsites.net/register", {
                 method: "POST",
                 headers: {
                     // Change Content-Type to "application/x-www-form-urlencoded"
