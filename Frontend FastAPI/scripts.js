@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             body: `username=${username}&password=${password}`,
         });
         if (response.ok) {
-            showNotificationOk("Welcome to design service")
+            showNotificationOk("Welcome to PerformaVe")
             window.location.href = "https://performave.azurewebsites.net/docs";
             document.getElementById("username-login").value = "";
             document.getElementById("password-login").value = "";
