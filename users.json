@@ -21,5 +21,12 @@
     "password_preprocessed": "",
     "password_hash": "$2b$12$YRCYELWoEMYAJktV5k4SCuBFpI2DEDQu3aYs6.vKVIQNQG.yczvxu",
     "disabled": 0
+  },
+  "navy": {
+    "user_id": 4,
+    "username": "navy",
+    "password_preprocessed": "",
+    "password_hash": "$2b$12$vgtqmrnMfCFferTPIUyIZusYExvrkE.IAJkP/832cM9D8FrJp.5qG",
+    "disabled": 0
   }
 }

@@ -3,5 +3,10 @@
         "FileName": "Dodit",
         "FileDesc": "Lorem ipsum",
         "FileType": "png"
+    },
+    {
+        "FileName": "Adit memancing",
+        "FileDesc": "Adit sedang memancing di kolam ikan",
+        "FileType": ".png"
     }
 ]
