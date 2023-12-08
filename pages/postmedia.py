@@ -66,10 +66,10 @@ async def create_upload_file(data: UploadFile = File(...)):
 
     return {"filename": filename, "image_id": image_id}
 
-@router.post("/uploadandacceptfile")
-async def upload_accept_file(options: Options = Depends(), data: UploadFile = File(...)):
-    data_options = options.dict()
-    result = "Uploaded Filename: {}. JSON Payload {}".format(data.filename, data_options)
+# @router.post("/uploadandacceptfile")
+# async def upload_accept_file(options: Options = Depends(), data: UploadFile = File(...)):
+#     data_options = options.dict()
+#     result = "Uploaded Filename: {}. JSON Payload {}".format(data.filename, data_options)
 
 @router.put('/updatedesc')
 async def update_Media_Desc(media: Options):

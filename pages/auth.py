@@ -12,6 +12,7 @@ router = APIRouter()
 SECRET_KEY = "b7bf32a1e45548858e1e7ee19a5f0258c3bc05f870c53bca4c03d327cfdaaa09"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 15
+# file_path = "users.json"
 
 with open("users.json", "r") as json_file:
     db = json.load(json_file)
@@ -28,6 +29,10 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+class UserCredentials(BaseModel):
+    username: str
+    password: str
+
 class TokenData(BaseModel):
     username: str or None = None
 
@@ -39,13 +44,23 @@ class User(BaseModel):
     name: str or None = None
     disabled: bool or None = None
 
-class UserCreate():
-    user_id: int 
-    username: str
-    password_preprocessed: str
-    name: Optional[str] = None
-    disabled: Optional[bool] = None
-    password_hash: str
+# class UserCreate():
+#     user_id: int 
+#     username: str
+#     password_preprocessed: str
+#     name: Optional[str] = None
+#     disabled: Optional[bool] = None
+#     password_hash: str
+
+class UserCreate:
+    def __init__(self, user_id: int, username: str, password_preprocessed: str,
+                 password_hash: str, name: Optional[str] = None, disabled: Optional[bool] = None):
+        self.user_id = user_id
+        self.username = username
+        self.password_preprocessed = password_preprocessed
+        self.password_hash = password_hash
+        self.name = name
+        self.disabled = disabled
 
 
 class UserInDB(User):
@@ -54,6 +69,19 @@ class UserInDB(User):
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl= 'token')
+
+def read_users_from_file(file_path):
+    try:
+        with open(file_path, "r") as file:
+            users = json.load(file)
+    except FileNotFoundError:
+        users = {}
+    return users
+
+# Function to write user data to the JSON file
+def write_users_to_file(file_path, users):
+    with open(file_path, "w") as file:
+        json.dump(users, file, indent=2)
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -146,30 +174,38 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
 
 #Register a new user
 @router.post('/register')
-async def register_user(new_user: User):
-    user_dict = new_user.dict()
+async def register_user(credentials: UserCredentials):
+    username = credentials.username
+    password = credentials.password
+
+    users = read_users_from_file("users.json")
+    last_user_id = max([user['user_id'] for user in users.values()], default=0)
+    new_user_id = last_user_id + 1
     user_found = False
 
     for user in db:
-        if new_user.username == user or new_user.user_id == user[0]:
+        if username == user:
             user_found = True
     
     if not user_found:
-        createdUser = UserCreate()
-        createdUser.user_id = new_user.user_id
-        createdUser.username = new_user.username
-        createdUser.password_preprocessed = ""
-        createdUser.password_hash = get_password_hash(new_user.password_preprocessed)
-        createdUser.disabled = 0
+        created_user = UserCreate(
+            user_id=new_user_id,
+            username=username,
+            password_preprocessed="",
+            password_hash=get_password_hash(password),
+            disabled=False  # Assuming you want to set disabled to False by default
+        )
 
-        finalNewUser = vars(createdUser)
+        # Convert the created user to a dictionary
+        final_new_user = vars(created_user)
 
-        db[new_user.username]= finalNewUser
+        # Add the new user to the existing users
+        users[username] = final_new_user
 
-        with open("users.json", "w") as write_file:
-            json.dump(db, write_file, indent=2)
+        # Write the updated user data back to the file
+        write_users_to_file("users.json", users)
 
-        return finalNewUser
+        return final_new_user
 
     else:
         return "Username or ID taken"

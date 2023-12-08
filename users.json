@@ -28,5 +28,44 @@
     "password_preprocessed": "",
     "password_hash": "$2b$12$vgtqmrnMfCFferTPIUyIZusYExvrkE.IAJkP/832cM9D8FrJp.5qG",
     "disabled": 0
+  },
+  "nubru": {
+    "user_id": 6,
+    "username": "nubru",
+    "password_preprocessed": "",
+    "password_hash": "$2b$12$otRqMpxm1wB.CmqyKNbGiuaFTsikh68.H6MINdZB1e1uxfFaFZLxC",
+    "disabled": 0
+  },
+  "bangjali": {
+    "user_id": 7,
+    "username": "bangjali",
+    "password_preprocessed": "",
+    "password_hash": "$2b$12$U62t0xjCCDX5Wq8PZxrdcO0uVsxlNWeNPH16WhipEuq4id30y6/5e",
+    "name": null,
+    "disabled": false
+  },
+  "${username}": {
+    "user_id": 8,
+    "username": "${username}",
+    "password_preprocessed": "",
+    "password_hash": "$2b$12$/APdzMGe2.56LlCsI7AZbeCev.KAmT.G4P3jcxmY.yeWQiU/9iiKK",
+    "name": null,
+    "disabled": false
+  },
+  "duatiga": {
+    "user_id": 9,
+    "username": "duatiga",
+    "password_preprocessed": "",
+    "password_hash": "$2b$12$g8iU6Dr9z5tMVDIs3p2B6eQCkaz3dYYOoLdkYf2J7vTC2ZKvpdFMe",
+    "name": null,
+    "disabled": false
+  },
+  "inaslari": {
+    "user_id": 10,
+    "username": "inaslari",
+    "password_preprocessed": "",
+    "password_hash": "$2b$12$C0DBqTPAf36SzGVAFi.69eb9GHAdIExpIQPElMSBrI79yGM27xVbu",
+    "name": null,
+    "disabled": false
   }
 }
